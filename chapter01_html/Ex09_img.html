@@ -1,0 +1,35 @@
+<!--
+	<img>태그
+	
+	1. 이미지를 삽입한다.
+	2. 속성
+		1) src : 이미지의 위치(경로)
+		2) alt : 이미지 대신 표시할 텍스트
+	3. 경로 표시
+		1) 절대 경로 : C:/workspace/workspace_web/
+    chapter01_html/images/google.jpg
+  		2) 상대 경로 : images/google.jpg	
+      (/로 시작하면 컨텍스트 루트부터 시작)
+  		3) 주요 폴더 
+  			(1) .  : 현재폴더
+  			(2) .. : 상위 폴더
+  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>이미지 표시</h1>
+  <img src="images/google.jpg" alt="구글이미지">
+
+  <h1>서버에 저장된 이미지</h1>
+  <img src="https://www.chosun.com/resizer/v2/VTGKMSYPX2DERRVFWCT4X2ZWUA.jpg?auth=c5a4fa4c66b2aee893fda3383c3433b182a9244b8e4e396f27fddb28c9194661&width=464" alt="">
+
+  <h1>이미지 표시</h1>
+  <img src="images/google.jpg" width = "300">
+  <!-- 너비(width)나 높이(height) 중 하나만 조정해도 함께 조정됨-->
+</body>
+</html>
