@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ex22 z-index</title>
+  <style>
+    /*
+      z-index
+      1. z방향(앞뒤)의 순서를 결정하는 인덱스 값
+      2. 정수 값을 가짐
+      3. 값이 클수록 앞으로 나온다.
+    */
+    .box{
+      width: 300px;
+      height: 300px;
+      margin-top: 50px;
+      margin-left: 50px;
+      position: absolute;
+    }
+    #red-box{
+      top: 0;
+      left: 0;
+      background-color: red;
+      z-index: 7;
+    }
+    #orange-box{
+      top: 50px;
+      left: 50px;
+      background-color: orange;
+      z-index: 6;
+    }
+    #yellow-box{
+      top: 100px;
+      left: 100px;
+      background-color: yellow;
+      z-index: 5;
+    }
+    #green-box{
+      top: 150px;
+      left: 150px;
+      background-color: green;
+      z-index: 4;
+    }
+    #blue-box{
+      top: 200px;
+      left: 200px;
+      background-color: blue;
+      z-index: 3;
+    }
+    #navy-box{
+      top: 250px;
+      left: 250px;
+      background-color: navy;
+      z-index: 2;
+    }
+    #purple-box{
+      top: 300px;
+      left: 300px;
+      background-color: purple;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class = "box" id = "red-box">빨강</div>
+  <div class = "box" id = "orange-box">주황</div>
+  <div class = "box" id = "yellow-box">노랑</div>
+  <div class = "box" id = "green-box">초록</div>
+  <div class = "box" id = "blue-box">파랑</div>
+  <div class = "box" id = "navy-box">남색</div>
+  <div class = "box" id = "purple-box">보라</div>
+</body>
+</html>
