@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 1. if문
+    // if 괄호 안에 있는 조건식이 참이면 중괄호 안에 내용을 수행
+    // 거짓이면 아무것도 수행하지 않는다.
+    let val = 10;
+    if(val < 11){
+        console.log(`val이 11보다 작습니다.`);
+    }
+
+    val = 1;
+    if(val < 11){
+        let val = 2;
+        console.log(`if 내부의 값은 ${val}`);
+    }
+    console.log(`if 외부의 값은 ${val}`);
+
+    // 2. if-else 문
+    // if면~하고, 그렇지 않으면 (나머지) else
+    val = 10;
+    if(val > 11){
+        console.log(`val이 11보다 큽니다.`);
+    }else{
+        console.log(`val이 11보다 작습니다.`);
+    }
+
+    // 3. if-else if-else
+    // 조건이 여러개일 때 사용
+    if(val > 0){
+        console.log(`양수`);
+    }else if(val < 0 ){
+        console.log(`음수`);
+    }else{
+        console.log(`0`);
+    }
+
+    /*
+        switch문
+        - if문과 비슷하게 조건을 통해 원ㅇ하는 결과를 도출하는 조건문
+        - if문은 괄호 안에 조건식이 들어가고, switch문은 값을 사용
+    */
+   const gender = '남';
+   switch(gender){
+        case '남' : console.log('성별이 남자입니다.');
+            break;
+        case '여' : console.log('성별이 여자입니다.');
+            break;
+        default : console.log('또 다른 성별입니다.');
+            break;
+   }
+
+</script>
+</html>
