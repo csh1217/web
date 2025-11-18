@@ -58,5 +58,31 @@
             break;
    }
 
+   /*
+        Q. 국어,영어, 수학 점수를 입력 받아 평균과 학점 출력(콘솔)
+        -    변수명 : kor, eng. mat, avg, grade
+        -  학점 : A ~ F
+   */
+  let kor = Number(prompt('국어 점수 입력'));
+  let eng = Number(prompt('영어 점수 입력'));
+  let mat = Number(prompt('수학 점수 입력'));
+  let avg = (kor + eng + mat)/3;
+  let grade;
+  
+  if(avg >= 90){
+    grade = 'A';
+  }else if(avg >= 80){
+    grade = 'B';
+  }else if(avg >= 70){
+    grade = 'C';
+  }else if (grade >= 60){
+    grade = 'D';
+  }else{
+    grade = 'F';
+  }
+
+  console.log(`평균 점수 : ${avg}점`);
+  console.log(`학점 : ${grade}`);
+  
 </script>
 </html>

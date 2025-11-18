@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /*
+        break
+        - 반복문을 종료시키는 키워드
+    */
+   // 0~9까지 1씩 증가하다가 i가 7일 때에 빠져나가는 반복문
+   for(let i = 0; i<10; i++){
+        console.log(i);
+        if(i == 7){
+            break;
+        }
+   }
+
+   /*
+        continue
+        - 해당 키워드 다음코드를 싱핼하지 않게 하는 키워드
+        - 주로 반복문에서 특정 조건일 때 실행을 시키지 않을 목적으로 사용
+   */
+  // 0~9까지 1씩 증가하면서 화면에 각 값 출력(7제외)
+  for(let i = 0; i < 10; i++){
+        if(i==7){
+            continue;
+        }
+        console.log(i);
+  }
+
+  /*
+        Q. 5개의 양수만 입력받아서(prompt) 평균 구하기
+        1. 0 이하의 숫자는 입력에서 제외, 다시 입력
+        2. 숫자가 아닌 입력도 제외, 다시 입력
+            =>isNaN(값) : boolean 리턴
+  */
+ let num;
+ let sum = 0;
+ let count = 0;
+  for( ; ;){
+    if(count != 5){
+        num = Number(prompt('숫자 입력 : '));
+        if(isNaN(num) == false){
+            if(num>0){
+                sum += num;
+                count++;
+                console.log(`${count}번째 숫자 : ${num}`);
+            }else{
+                alert('!오류 : 0 이하의 숫자 입력!')
+                continue;
+            }
+        }
+        else{
+            alert("!오류 : 숫자가 아닌 문자열 입력!")
+            continue;
+        }
+    }else{
+        break;
+    }
+  } 
+  console.log(`평균 : ${sum/5}`);
+  
+</script>
+</html>
