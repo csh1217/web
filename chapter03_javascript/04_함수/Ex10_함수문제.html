@@ -25,20 +25,18 @@
 
 // 10, 3 일때 -> 10 < Math.pow(10, (3-1)) => 앞에 0 하나 추가
 // 검증하면서 자릿수(b) --
-/*
+
     function makeZeroNum(a, b){
-        for(;b > 0; b--){
-            if(a < Math.pow(10, (b-1))){
-                a = '0'+a;
-            }else{
-                return a
-            }
+        a = String(a);
+        while(a.length < b){
+            a = '0' + a;
         }
+        return a;
     }   
     let num = Number(prompt('숫자 입력'));
     let digit = Number(prompt('자릿수 입력'));
     console.log(makeZeroNum(num , digit));
-    */
+    
 
 
     /*
@@ -56,20 +54,14 @@
     
     clock.innerText = ''; 
     
-     function to12Times(a){
-        let b = new Date(a)
-        let h;
-        if(b.getHours() > 11){
-            h = b.getHours() - 12;
-        }else{
-            h = b.getHours();
-        }
+     function to12Times(){
+        let b = new Date()
         clock.innerText =
-        `${b.getFullYear()}-${b.getMonth()}-${b.getDate()} ${(b.getHours() > 11)?'오후':'오전'} ${h}:${b.getMinutes()}`;
+        `${b.getFullYear()}-${b.getMonth() + 1}-${b.getDate()} ${(b.getHours() > 11)?'오후':'오전'} ${((b.getHours()>11)?(b.getHours()-12):(b.getHours()==0)?12:b.getHours())}:${b.getMinutes()}`;
         return clock.innerText;
     }
-
-    console.log(to12Times(now));
+//00시?
+    console.log(to12Times());
     
 
     /*
@@ -80,24 +72,24 @@
     */
    function watch(){
         let b = new Date();
-        let hour = ((b.getHours() < 10)?'0':'') + b.getHours();
+        let hour = ((b.getHours() < 10)?'0':'') + b.getHours(); // 시, 분 ,초가 한자리 숫자일 때 앞에 0 추가
         let min = ((b.getMinutes() < 10)?'0':'') + b.getMinutes();
         let sec = ((b.getSeconds() < 10)?'0':'') + b.getSeconds();
         clock.innerText = 
-        `${b.getFullYear()}-${b.getMonth()}-${b.getDate()} ${hour}:${min}:${sec}`;
+        `${b.getFullYear()}-${makeZeroNum((b.getMonth() + 1),2)}-${makeZeroNum((b.getDate()),2)} ${makeZeroNum((b.getHours), 2)}:${makeZeroNum((b.getMinutes), 2)}:${makeZeroNum((b.getSeconds), 2)}`;
         return clock.innerText
    }
 
-   intervalId = null;
+   intervalId = null;// run 중복 실행을 막아주기 위한 변수 생성
    let run = function() {
-        if(intervalId !== null) return;
+        if(intervalId !== null) return; // run 중복 방지(여러번 클릭 시 여러번 실행 되는 것 방지)
         intervalId = setInterval(() => {
             watch();
         }, 1000);
     }
    let stop = function(){
     clearInterval(intervalId)
-    intervalId = null;
+    intervalId = null; // 변수 초기화
    }
     let reset = function() {
         stop();
