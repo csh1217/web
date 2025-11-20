@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id = "list"></ul>
+</body>
+<script>
+    const fruits = ["apple", "banana", "orange", "kiwi", "mango"];
+    // id 가 list인 요소 가져오기
+
+    // for(let i of fruits){
+    //     let li = document.createElement('li');//<li></li> 생성
+    //     let textNode = document.createTextNode(i);
+    //     li.appendChild(textNode);
+    //     document.getElementById('list').appendChild(li);
+    // }
+    
+    let msg = '';
+    for(let f of fruits){
+        msg += '<li>' + f + '</li>'
+    }
+    document.getElementById('list').innerHTML = msg;
+</script>
+</html>

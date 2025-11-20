@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            margin: auto;
+            width: 800px;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        h1{
+            padding: 20px;
+            margin: auto;
+            text-align: center;
+            font-weight: 400;
+            
+        }
+        th, td{
+            padding: 5px;
+            border: 1px solid black;
+        }
+        th{
+            background-color: teal;
+            color: white;
+            font-weight: 400;
+        }
+        input[name="sn1"], input[name="sn2"]{
+            width: 100px;
+        }
+        input[readonly]{
+            width: 80px;
+            background-color: lightgray;
+        }
+        input[name="self"]{
+            padding: 10px;
+            margin: 20px 5px;
+            width: 400px;
+            height: 100px;
+        }
+        .result{
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 10px;
+        }
+        .result button{
+            width: 100px;
+            height: 60px;
+            background-color: teal;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class = 'wrapper'>
+        <h1>회원가입</h1>
+        <form action="#" name = "myForm">
+            <div class = "box">
+                <table>
+                    <tr>
+                        <th colspan="2">회원 기본 정보</th>
+                    </tr>
+                    <tr>
+                        <td>아이디</td>
+                        <td><input name = 'id' type="text" placeholder="※8-16자 소문자+숫자"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td><input name = 'pw'type="text" placeholder="※8-16자 소문자+숫자"></td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 확인</td>
+                        <td><input name = 'checkpw'type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td><input name = 'email1'type="text">@
+                            <input name = 'email2'type="text" list = "emails" placeholder="직접 입력">
+                            <datalist id = "emails">
+                                <option value = "naver.com">naver.com</option>
+                                <option value = "google.com">google.com</option>
+                                <option value = "daum.com">daum.com</option>
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td><input name = 'name' type="text"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">개인정보</th>
+                        <tr>
+                            <td>주민등록번호</td>
+                            <td><input name = "sn1" type = "text">-<input name = "sn2" type = "text"> 예) 123456-1234567<button type = "button" value="확인" onclick="insertBirth()">확인</button></td>
+                        </tr>
+                        <tr>
+                            <td>생일</td>
+                            <td><input type="text" id = "birthy" readonly>년 <input type="text" id = "birthm" readonly>월<input type="text" id="birthd" readonly>일</td>
+                        </tr>
+                        <tr>
+                            <td>성별</td>
+                            <td>
+                                <input type = "radio" id = "man" name = "gender" value = "남"><label for = "man">남</label>
+                                <input type = "radio" id = "woman" name = "gender" value = "여"><label for = "man">여</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>관심분야</td>
+                            <td>
+                                <input type = "checkbox" id = "travel" name = "interest" value = "여행"><label for = "travel">여행</label>
+                                <input type = "checkbox" id = "movie" name = "interest" value = "영화"><label for = "movie">영화</label>
+                                <input type = "checkbox" id = "read" name = "interest" value = "독서"><label for = "read">독서</label>
+                                <input type = "checkbox" id = "music" name = "interest" value = "음악"><label for = "music">음악</label>
+                                <input type = "checkbox" id = "none" name = "interest" value = "관심없음"><label for = "none">관심없음</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>자기소개</td>
+                            <td><input type="text" name = "self"></td>
+                        </tr>
+                    </tr>
+                </table>
+            </div>
+        </form>
+        <div class = "result">
+            <button id = "submit" value = "회원가입" onclick="signIn()">회원가입</button>
+            <button id = "reset">다시입력</button>
+        </div>
+    </div>
+</body>
+<script>
+    // 아이디 검증
+    // 비밀번호 검증
+    // 비밀번호&비밀번호확인 같은지 확인
+    // 이메일 검증
+    // 이름 검증
+    // 주민등록번호 검증
+    // 주민등록번호 확인 시 생일 자동 작성
+    // 성별 골랐는지 확인
+    // 관심분야 한개 이상 골랐는지 확인
+    // 결과 함수 생성
+
+    const regId = /^[0-9a-z]{8,16}$/; //아이디 검증
+    const regPw = /^[0-9a-zA-Z]{8,16}$/; //비밀번호 검증
+    const regName = /^[가-힣]{2,6}$/; // 이름 검증
+    const regEmail =/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; //이메일검증
+    const regPid1 = /^\d{6}$/; // 주민등록번호 앞자리 검증
+    const regPid2 = /^\d{7}$/; // 주민등록번호 뒷자리 검증
+
+    
+    
+    let form = document.forms.myForm;
+
+    function signIn(){
+
+
+        //!!오류 시 value 확인!!
+        // 요소 가져오기
+        let id = form.id;
+        let pw = form.pw;
+        let checkpw = form.checkpw;
+        let name = form.name;
+        let email1 = form.email1;
+        let email2 = form.email2;
+        let sn1 = form.sn1;
+        let sn2 = form.sn2;
+        
+        if(!regId.test(id.value)){ //아이디 검증
+            alert('아이디 입력 오류! 양식대로 작성 바랍니다.');
+            id.value = '';
+            id.focus();
+            return;
+        }
+        if(!regPw.test(pw.value)){ // 비밀번호 검증
+            alert('비밀번호 입력 오류! 양식대로 작성 바랍니다.');
+            pw.value = '';
+            pw.focus();
+            return;
+        }
+        if(pw.value !== checkpw.value){ // 비밀번호 확인
+            alert('비밀번호가 일치하지 않습니다.');
+            checkpw.value = '';
+            checkpw.focus();
+            return;
+        }
+        if(!regEmail.test(email1.value+'@'+email2.value)){ //이메일 검증
+            alert('이메일 입력 오류!! 양식대로 작성 바랍니다.');
+            email1.value = '';
+            email2.value = '';
+            email1.focus();
+            return;
+        }
+        if(!regName.test(name.value)){ // 이름 검증
+            alert('이름 입력 오류! 양식대로 작성 바랍니다');
+            name.value = '';
+            name.focus();
+            return;
+        }
+        if(!regPid1.test(sn1.value)||!regPid2.test(sn2.value)){ // 주민등록번호 검증
+            alert('주민등록번호 입력 오류! 양식대로 작성 바랍니다');
+            sn1.value = '';
+            sn2.value = '';
+            sn1.focus();
+            return;
+        }
+
+
+
+    }
+
+   
+
+    function reset(){
+
+    }
+    
+</script>
+</html>
