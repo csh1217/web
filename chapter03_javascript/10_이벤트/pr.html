@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<style>
+	</style>
+</head>
+<body>
+		<form action="#" id="form">
+				<input type="submit">
+		</form>
+		<a href="https//:www.naver.com" id="a">네이버</a>
+<body>
+<script>
+	document.querySelector("#form").addEventListener('submit',(e)=>{
+		e.preventDefault(); // 방지
+		console.log(`prevent "submit" succes`) // 방지 확인
+	})
+	document.querySelector("#a").addEventListener('click',(e)=>{
+		e.preventDefault(); // 방지
+		console.log(`prevent "<a href>"succes`) // 방지 확인
+	})
+</script> 
+</html>

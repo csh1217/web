@@ -36,7 +36,7 @@
             width: 80px;
             background-color: lightgray;
         }
-        input[name="self"]{
+        textarea{
             padding: 10px;
             margin: 20px 5px;
             width: 400px;
@@ -59,7 +59,7 @@
 <body>
     <div class = 'wrapper'>
         <h1>회원가입</h1>
-        <form action="#" name = "myForm">
+        <form action="#" name = "myForm" id = "form">
             <div class = "box">
                 <table>
                     <tr>
@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>이메일</td>
-                        <td><input name = 'email1'type="text">@
+                        <td><input name = 'email1'type="text"> @
                             <input name = 'email2'type="text" list = "emails" placeholder="직접 입력">
                             <datalist id = "emails">
                                 <option value = "naver.com">naver.com</option>
@@ -96,16 +96,16 @@
                         <th colspan="2">개인정보</th>
                         <tr>
                             <td>주민등록번호</td>
-                            <td><input name = "sn1" type = "text">-<input name = "sn2" type = "text"> 예) 123456-1234567<button type = "button" value="확인" onclick="insertBirth()">확인</button></td>
+                            <td><input name = "sn1" type = "text"> - <input name = "sn2" type = "text"> 예) 123456-1234567 <button type = "button" value="확인" onclick="insertBirth()">확인</button></td>
                         </tr>
                         <tr>
                             <td>생일</td>
-                            <td><input type="text" id = "birthy" readonly>년 <input type="text" id = "birthm" readonly>월<input type="text" id="birthd" readonly>일</td>
+                            <td><input type="text" id = "birthy" readonly>년 <input type="text" id = "birthm" readonly>월 <input type="text" id="birthd" readonly>일</td>
                         </tr>
                         <tr>
                             <td>성별</td>
                             <td>
-                                <input type = "radio" id = "man" name = "gender" value = "남"><label for = "man">남</label>
+                                <input type = "radio" id = "man" name = "gender" value = "남" ><label for = "man">남</label>
                                 <input type = "radio" id = "woman" name = "gender" value = "여"><label for = "man">여</label>
                             </td>
                         </tr>
@@ -120,8 +120,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>자기소개</td>
-                            <td><input type="text" name = "self"></td>
+                            <td>
+                                자기소개
+                            </td>
+                            <td>
+                                <textarea name = "self"></textarea>
+                            </td>
                         </tr>
                     </tr>
                 </table>
@@ -129,7 +133,7 @@
         </form>
         <div class = "result">
             <button id = "submit" value = "회원가입" onclick="signIn()">회원가입</button>
-            <button id = "reset">다시입력</button>
+            <button id = "reset" onclick="resetForm()">다시입력</button>
         </div>
     </div>
 </body>
@@ -150,17 +154,10 @@
     const regName = /^[가-힣]{2,6}$/; // 이름 검증
     const regEmail =/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; //이메일검증
     const regPid1 = /^\d{6}$/; // 주민등록번호 앞자리 검증
-    const regPid2 = /^\d{7}$/; // 주민등록번호 뒷자리 검증
+    const regPid2 = /^[1-4]\d{6}$/; // 주민등록번호 뒷자리 검증
 
-    
-    
     let form = document.forms.myForm;
-
-    function signIn(){
-
-
-        //!!오류 시 value 확인!!
-        // 요소 가져오기
+    
         let id = form.id;
         let pw = form.pw;
         let checkpw = form.checkpw;
@@ -169,6 +166,17 @@
         let email2 = form.email2;
         let sn1 = form.sn1;
         let sn2 = form.sn2;
+        let gender = form.gender;
+        let interest = form.interest;
+        let self = form.self;
+
+
+
+    function signIn(){
+
+
+        //!!오류 시 value 확인!!
+        // 요소 가져오기
         
         if(!regId.test(id.value)){ //아이디 검증
             alert('아이디 입력 오류! 양식대로 작성 바랍니다.');
@@ -209,14 +217,58 @@
             return;
         }
 
+        let gCheck = false; // 성별 선택 확인
+        for(g of gender){
+            if(g.checked == true){
+                gCheck = true;
+                break;
+            }
+        }
+        if(gCheck == false){
+            alert('성별을 선택해 주십시오.');
+            return;
+        }
 
+        let iCheck = false; // 관심분야 선택 확인
+        for(i of interest){
+            if(i.checked == true){
+                iCheck = true;
+                break;
+            }
+        }
+        if(iCheck == false){
+            alert('관심분야를 선택해 주십시오.');
+            return;
+        }
 
+        if(self.value == ''){ //자기소개 검증
+            alert('자기소개를 입력해주십시오.')
+            return;
+        }
+        form.submit();
+    }
+
+    function insertBirth(){
+        if(!regPid1.test(sn1.value)||!regPid2.test(sn2.value)){
+            alert('주민등록번호 입력 오류! 양식대로 작성 바랍니다');
+            sn1.value = '';
+            sn2.value = '';
+            sn1.focus();
+        }else{
+            if(Number(sn1.value[0] + sn1.value[1]) >25){
+                document.querySelector('#birthy').value = '19' + sn1.value[0] + sn1.value[1];
+            }else{
+                document.querySelector('#birthy').value = '20' + sn1.value[0] + sn1.value[1];
+            }
+            document.querySelector('#birthm').value = sn1.value[2] + sn1.value[3];
+            document.querySelector('#birthd').value = sn1.value[4] + sn1.value[5];
+        }
     }
 
    
 
-    function reset(){
-
+    function resetForm(){
+        document.getElementById('form').reset();
     }
     
 </script>
