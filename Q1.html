@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            margin: auto;
+            width: 800px;
+        }
+        h1{
+            color: red;
+            text-align: center;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            background-color: cyan;
+        }
+        tr, td{
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .result{
+            display: flex;
+            justify-content: center;
+        }
+        button{
+            margin: 20px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="#", id="myForm">
+            <h1>회원가입</h1>
+            <table>
+                <tr>
+                    <td>아이디</td>
+                    <td><input type="text" id="uid"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호</td>
+                    <td><input type="text" id="pw"></td>
+                </tr>
+                <tr>
+                    <td>비밀번호 확인</td>
+                    <td><input type="text" id="cpw"></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="text" id="email1"> @ <input type="text" id="email2"></td>
+                </tr>
+                <tr>
+                    <td>나이</td>
+                    <td><input type="text" id="age"></td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td><input type="text" id="pn1"> - <input type="text" id="pn2"></td>
+                </tr>
+                <tr>
+                    <td>성별</td>
+                    <td>
+                       <input type="radio" name="gender" id="man" value="남"><label for="man">남</label> 
+                       <input type="radio" name="gender" id="woman" value="여"><label for="woman">여</label> 
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div class="result">
+            <button type="button" onclick="signIn()" value="회원가입">회원가입</button>
+            <button type="reset" onclick="resetInfo()" value="초기화">초기화</button>
+        </div>
+    </div>
+</body>
+<script>
+    
+    function signIn(){
+        let form = document.forms.myForm;
+        let uid = form.uid;
+        let pw = form.pw;
+        let cpw = form.cpw;
+        let gender = form.gender;
+        
+        if(uid.value === ''){
+            alert('아이디를 입력하세요');
+            return;
+        }
+        if(pw.value === ''){
+            alert('비밀번호를 입력하세요');
+            return;
+        }
+        if(cpw.value !== pw.value){
+            alert('비밀번호가 같지 않습니다.');
+            return;
+        }
+
+        let gCheck = false;
+        for(g of gender){
+            if(g.checked == true){
+                gCheck = true;
+                break;
+            }
+        }
+        if(gCheck == false){
+            alert('성별을 선택해 주십시오.');
+            return;
+        }
+    }
+
+    function resetInfo(){
+        document.getElementById('form').reset();
+    }
+</script>
+</html>
